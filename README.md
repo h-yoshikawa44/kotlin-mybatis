@@ -50,3 +50,9 @@ insert into user values
   (101, "Jiro", 25, "Hello"),
   (102, "Saburo", 20, "Hello");
 ```
+
+## コード生成
+```bash
+./gradlew mbGenerator
+```
+か、IntelliJ IDEA の Gradle タスクの mbGenerator を実行。

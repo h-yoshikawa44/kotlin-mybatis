@@ -18,6 +18,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.30")
     mybatisGenerator("org.mybatis.generator:mybatis-generator-core:1.4.1")
     testImplementation(kotlin("test"))
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
@@ -31,4 +32,12 @@ tasks.withType<KotlinCompile> {
 mybatisGenerator {
     verbose = true
     configFile = "${projectDir}/src/main/resources/generatorConfig.xml"
+}
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "1.8"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "1.8"
 }

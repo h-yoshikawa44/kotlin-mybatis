@@ -3,16 +3,13 @@
   MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-  <!-- mysql-connector-javaのパスは各自の環境に合わせて変更 -->
-  <classPathEntry
-    location="C:\Users\{USER}\.gradle\caches\modules-2\files-2.1\mysql\mysql-connector-java\8.0.30\b26dd6e4e917d3d4726c34d09d2fd67df7c1dd37/mysql-connector-java-8.0.30.jar"/>
   <context id="MySQLTables" targetRuntime="MyBatis3Kotlin">
     <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
     <commentGenerator>
       <property name="suppressDate" value="true"/>
     </commentGenerator>
     <jdbcConnection
-      driverClass="com.mysql.jdbc.Driver"
+      driverClass="com.mysql.cj.jdbc.Driver"
       connectionURL="jdbc:mysql://127.0.0.1:3306/example"
       userId="root"
       password="mysql">

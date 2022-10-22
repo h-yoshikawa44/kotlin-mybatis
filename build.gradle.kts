@@ -32,7 +32,11 @@ tasks.withType<KotlinCompile> {
 mybatisGenerator {
     verbose = true
     configFile = "${projectDir}/src/main/resources/generatorConfig.xml"
+    dependencies {
+        mybatisGenerator(group="mysql", name="mysql-connector-java", version="8.0.30")
+    }
 }
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"

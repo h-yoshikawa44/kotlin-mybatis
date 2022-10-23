@@ -57,6 +57,41 @@ fun insertMultiple() {
     }
 }
 
+fun updateByPrimaryKeySelectiveFunc() {
+    val user = User(id = 105, profile = "Bye")
+    createSessionFactory().openSession().use { session ->
+        val mapper = session.getMapper(UserMapper::class.java)
+        val count = mapper.updateByPrimaryKeySelective(user)
+        session.commit()
+        println("${count}行のレコードを更新しました")
+    }
+}
+
+fun updateNotRecord() {
+    createSessionFactory().openSession().use { session ->
+        val mapper = session.getMapper(UserMapper::class.java)
+        val count = mapper.update {
+            set(UserDynamicSqlSupport.profile).equalTo("Hey")
+            where { UserDynamicSqlSupport.id isEqualTo 104 }
+        }
+        session.commit()
+        println("${count}行のレコードを更新しました")
+    }
+}
+
+fun updateRecord() {
+    val user = User(profile = "Good Morning")
+    createSessionFactory().openSession().use { session ->
+        val mapper = session.getMapper(UserMapper::class.java)
+        val count = mapper.update {
+            updateSelectiveColumns(user)
+            where { UserDynamicSqlSupport.name isEqualTo "Shiro" }
+        }
+        session.commit()
+        println("${count}行のレコードを更新しました")
+    }
+}
+
 fun createSessionFactory(): SqlSessionFactory {
     val resource = "mybatis-config.xml"
     val inputStream = Resources.getResourceAsStream(resource)

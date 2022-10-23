@@ -92,6 +92,26 @@ fun updateRecord() {
     }
 }
 
+fun deleteByPrimaryKeyFunc() {
+    createSessionFactory().openSession().use { session ->
+        val mapper = session.getMapper(UserMapper::class.java)
+        val count = mapper.deleteByPrimaryKey(102)
+        session.commit()
+        println("${count}行のレコードを削除しました")
+    }
+}
+
+fun deleteFunc() {
+    createSessionFactory().openSession().use { session ->
+        val mapper = session.getMapper(UserMapper::class.java)
+        val count = mapper.delete {
+            where { UserDynamicSqlSupport.name isEqualTo "Jiro"}
+        }
+        session.commit()
+        println("${count}行のレコードを削除しました")
+    }
+}
+
 fun createSessionFactory(): SqlSessionFactory {
     val resource = "mybatis-config.xml"
     val inputStream = Resources.getResourceAsStream(resource)
